@@ -75,9 +75,11 @@ Issuefy is a modern, easy-to-use issue tracker designed to simplify the manageme
 ## 🤝&nbsp;&nbsp;Contributing
 
 Contributions are always welcome!
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for ways to get started.
 </br></br>
 
 ## 🪪&nbsp;&nbsp; License
 
-Issuefy is open-source under the [MIT License](./LICENSE). 
+Issuefy is open-source under the [MIT License](./LICENSE).
 Feel free to learn, add upon, and share!
