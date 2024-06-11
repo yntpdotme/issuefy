@@ -7,3 +7,9 @@
 .radix-themes {
 	--default-font-family: var(--font-inter);
 }
+
+@layer utilities {
+	.nav-link {
+		@apply text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors;
+	}
+}
