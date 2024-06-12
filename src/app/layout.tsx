@@ -1,5 +1,6 @@
 import {Container, Theme} from '@radix-ui/themes';
 import type {Metadata} from 'next';
+import {ThemeProvider} from 'next-themes';
 import {Inter} from 'next/font/google';
 import './globals.css';
 import NavBar from './NavBar';
@@ -16,14 +17,16 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={inter.variable}>
-				<Theme>
-					<NavBar />
-					<main className="p-5">
-						<Container>{children}</Container>
-					</main>
-				</Theme>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+					<Theme>
+						<NavBar />
+						<main className="p-5">
+							<Container>{children}</Container>
+						</main>
+					</Theme>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

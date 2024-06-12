@@ -1,5 +1,6 @@
 'use client';
 
+import ThemeSwitch from '@/components/ThemeSwitch';
 import {Container, Flex} from '@radix-ui/themes';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -12,13 +13,13 @@ const NavBar = () => {
 			<Container>
 				<Flex justify="between">
 					<Flex align="center" gap="5">
-						<Link href="/" className="mr-1">
+						<Link href="/" className="mr-0.5">
 							<AiFillBug size="18" />
 						</Link>
 						<Navlinks />
 					</Flex>
 					<Flex align="center" gap="5">
-						<span className="nav-link">Theme</span>
+						<ThemeSwitch />
 						<span className="nav-link">Login</span>
 					</Flex>
 				</Flex>
