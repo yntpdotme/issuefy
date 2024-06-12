@@ -56,6 +56,8 @@ Issuefy is a modern, easy-to-use issue tracker designed to simplify the manageme
 
 - [Prisma](https://www.prisma.io) – ORM
 
+- [Postgres](https://neon.tech/) - Database
+
 - [Git](https://git-scm.com) – Versioning
 
 - [Vercel](https://vercel.com) – Deployments
