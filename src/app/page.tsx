@@ -1,10 +1,12 @@
-export default function Home() {
+const HomePage = () => {
 	return (
 		<>
-			<main className="flex flex-col gap-8 row-start-2 items-center min-h-screen p-8 pb-20 sm:p-20 justify-center">
+			<div className="flex flex-col gap-8 items-center h-[90vh] justify-center w-full">
 				<h1 className="text-4xl font-semibold">Issuefy</h1>
 				<p>Effortlessly manage your development issues</p>
-			</main>
+			</div>
 		</>
 	);
-}
+};
+
+export default HomePage;

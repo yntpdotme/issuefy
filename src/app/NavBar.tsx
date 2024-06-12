@@ -9,7 +9,7 @@ import {AiFillBug} from 'react-icons/ai';
 
 const NavBar = () => {
 	return (
-		<nav className="border-b mb-5 px-5 py-3 dark:border-zinc-800">
+		<nav className="border-b px-5 py-3 dark:border-zinc-800 sticky top-0 z-10 backdrop-blur-sm">
 			<Container>
 				<Flex justify="between">
 					<Flex align="center" gap="5">

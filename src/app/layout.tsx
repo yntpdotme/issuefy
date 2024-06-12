@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={inter.variable}>
+			<body className={`${inter.variable} antialiased h-screen`}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					<Theme>
+					<Theme className="flex flex-col">
 						<NavBar />
-						<main className="p-5">
+						<main className="p-5 flex-1 overflow-scroll">
 							<Container>{children}</Container>
 						</main>
 					</Theme>
