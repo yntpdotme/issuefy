@@ -20,7 +20,11 @@ const NavBar = () => {
           </Flex>
           <Flex align="center" gap="5">
             <ThemeSwitch />
-            <span className="nav-link">Login</span>
+            <span className="nav-link">
+              <Link href="/auth/login" className="nav-link">
+                Login
+              </Link>
+            </span>
           </Flex>
         </Flex>
       </Container>
