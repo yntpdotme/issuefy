@@ -6,6 +6,7 @@
 
 .radix-themes {
   --default-font-family: var(--font-inter);
+  --destructive: 239, 68, 68;
 }
 
 @layer utilities {

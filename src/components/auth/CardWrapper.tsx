@@ -12,7 +12,7 @@ type Props = {
   showGuestLogin?: boolean;
 };
 
-const CardWrapper = ({
+export const CardWrapper = ({
   children,
   headerLabel,
   backButtonLabel,
@@ -38,5 +38,3 @@ const CardWrapper = ({
     </Card>
   );
 };
-
-export default CardWrapper;
