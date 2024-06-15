@@ -22,7 +22,7 @@ export const CardWrapper = ({
 }: Readonly<Props>) => {
   return (
     <Card className="w-[400px] shadow-md">
-      <div className="p-6 text-center text-md text-zinc-500 dark:text-zinc-400">
+      <div className="text-md p-6 text-center text-zinc-500 dark:text-zinc-400">
         {headerLabel}
       </div>
       <div>{children}</div>

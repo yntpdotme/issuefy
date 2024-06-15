@@ -31,7 +31,6 @@ export const PasswordInput = <TFieldValues extends FieldValues>({
         disabled={disabled}
         className="border-none shadow-none hover:outline-none dark:shadow"
         register={register}
-
       />
       <button
         type="button"
