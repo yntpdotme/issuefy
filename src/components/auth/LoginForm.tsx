@@ -1,23 +1,30 @@
 'use client';
 
+import {login} from '@/action/login';
 import {CardWrapper} from '@/components/auth/CardWrapper';
-import {FormMessage} from '@/components/ui/FormMessage';
 import {PasswordInput} from '@/components/auth/PasswordInput';
 import {FormError} from '@/components/FormError';
 import {FormSuccess} from '@/components/FormSuccess';
 import {FormItem} from '@/components/ui/FormItem';
+import {FormMessage} from '@/components/ui/FormMessage';
 import {Input} from '@/components/ui/Input';
 import {LoginSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
+import {useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
 const LoginForm = () => {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>();
+
   const {
     handleSubmit,
     register,
     formState: {errors},
+    reset,
   } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -28,7 +35,20 @@ const LoginForm = () => {
   });
 
   const onSubmit = (data: z.infer<typeof LoginSchema>) => {
-    console.log(data);
+    setError('');
+    setSuccess('');
+
+    startTransition(async () => {
+      const res = await login(data);
+      if (res?.error) {
+        reset();
+        setError(res.error);
+      }
+      if (res?.success) {
+        reset();
+        setSuccess(res?.success);
+      }
+    });
   };
 
   return (
@@ -48,21 +68,23 @@ const LoginForm = () => {
             type="email"
             placeholder="john.doe@example.com"
             register={register('email')}
+            disabled={isPending}
           />
           <FormMessage error={errors.email?.message} />
         </FormItem>
 
         <FormItem label="Password" id="password">
-          <PasswordInput register={register('password')} />
+          <PasswordInput register={register('password')} disabled={isPending} />
           <FormMessage error={errors.password?.message} />
         </FormItem>
 
-        <FormSuccess message="" />
+        <FormSuccess message={success} />
 
-        <FormError message="" />
+        <FormError message={error} />
 
         <Button
           type="submit"
+          disabled={isPending}
           className="mt-2 h-9 w-full cursor-pointer bg-black dark:bg-white dark:text-black"
         >
           Login
