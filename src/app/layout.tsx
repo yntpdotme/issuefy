@@ -1,5 +1,7 @@
+import {auth} from '@/auth';
 import {Container, Theme} from '@radix-ui/themes';
 import type {Metadata} from 'next';
+import {SessionProvider} from 'next-auth/react';
 import {ThemeProvider} from 'next-themes';
 import {Inter} from 'next/font/google';
 import './globals.css';
@@ -11,24 +13,28 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} h-screen antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Theme className="flex flex-col">
-            <NavBar />
-            <main className="flex-1 overflow-scroll p-5">
-              <Container>{children}</Container>
-            </main>
-          </Theme>
-        </ThemeProvider>
-      </body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${inter.variable} h-screen antialiased`}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Theme className="flex flex-col">
+              <NavBar />
+              <main className="flex-1 overflow-scroll p-5">
+                <Container>{children}</Container>
+              </main>
+            </Theme>
+          </ThemeProvider>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
 
