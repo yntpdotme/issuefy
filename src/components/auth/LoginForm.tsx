@@ -11,11 +11,15 @@ import {Input} from '@/components/ui/Input';
 import {LoginSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
+import {useSearchParams} from 'next/navigation';
 import {useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
 const LoginForm = () => {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl');
+
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -39,7 +43,7 @@ const LoginForm = () => {
     setSuccess('');
 
     startTransition(async () => {
-      const res = await login(data);
+      const res = await login(data, callbackUrl);
       if (res?.error) {
         reset();
         setError(res.error);
