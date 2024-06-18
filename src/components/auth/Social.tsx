@@ -24,7 +24,7 @@ export const Social = () => {
         className="h-9 flex-1 cursor-pointer shadow-[inset_0_0_0_0.5px_var(--accent-a8)]"
         variant="outline"
         color="gray"
-        onClick={() => ({})}
+        onClick={() => onClick('google')}
       >
         <FcGoogle className="scale-125" />
       </Button>
@@ -34,7 +34,7 @@ export const Social = () => {
         className="h-9 flex-1 cursor-pointer shadow-[inset_0_0_0_0.5px_var(--accent-a8)]"
         variant="outline"
         color="gray"
-        onClick={() => ({})}
+        onClick={() => onClick('github')}
       >
         <FaGithub className="scale-125 text-black dark:text-white" />
       </Button>

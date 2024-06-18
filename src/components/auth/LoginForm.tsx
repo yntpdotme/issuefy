@@ -19,6 +19,10 @@ import {z} from 'zod';
 const LoginForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
+  const urlError =
+    searchParams.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email already in use with different provider'
+      : '';
 
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
@@ -84,7 +88,7 @@ const LoginForm = () => {
 
         <FormSuccess message={success} />
 
-        <FormError message={error} />
+        <FormError message={error || urlError} />
 
         <Button
           type="submit"
