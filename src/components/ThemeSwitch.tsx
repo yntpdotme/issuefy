@@ -5,7 +5,7 @@ import Image from 'next/image';
 import {useEffect, useState} from 'react';
 import {FiMoon, FiSun} from 'react-icons/fi';
 
-const ThemeSwitch = () => {
+export const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false);
   const {setTheme, resolvedTheme} = useTheme();
 
@@ -32,5 +32,3 @@ const ThemeSwitch = () => {
     return <FiMoon onClick={() => setTheme('dark')} className="nav-link" />;
   }
 };
-
-export default ThemeSwitch;

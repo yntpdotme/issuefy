@@ -1,3 +1,5 @@
+'user server';
+
 import prisma from '@/prisma/client';
 
 export const getUserByEmail = async (email: string) => {
@@ -5,7 +7,7 @@ export const getUserByEmail = async (email: string) => {
     const user = await prisma.user.findUnique({where: {email}});
 
     return user;
-  } catch (error) {
+  } catch {
     return null;
   }
 };

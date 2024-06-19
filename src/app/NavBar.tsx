@@ -1,6 +1,6 @@
 'use client';
 
-import ThemeSwitch from '@/components/ThemeSwitch';
+import {ThemeSwitch} from '@/components/ThemeSwitch';
 import {Container, Flex} from '@radix-ui/themes';
 import classNames from 'classnames';
 import Link from 'next/link';

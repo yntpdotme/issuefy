@@ -15,7 +15,7 @@ import {useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
-const RegisterForm = () => {
+export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -95,5 +95,3 @@ const RegisterForm = () => {
     </CardWrapper>
   );
 };
-
-export default RegisterForm;
