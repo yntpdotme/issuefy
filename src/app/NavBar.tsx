@@ -4,11 +4,19 @@ import {LogoutButton} from '@/components/auth/LogoutButton';
 import Skeleton from '@/components/Skeleton';
 import {ThemeSwitch} from '@/components/ThemeSwitch';
 import {useCurrentUser} from '@/hooks/useCurrentUser';
-import {Container, Flex} from '@radix-ui/themes';
+import {
+  Avatar,
+  Box,
+  Container,
+  DropdownMenu,
+  Flex,
+  Text,
+} from '@radix-ui/themes';
 import classNames from 'classnames';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {AiFillBug} from 'react-icons/ai';
+import {RxExit} from 'react-icons/rx';
 
 const NavBar = () => {
   return (
@@ -70,9 +78,38 @@ const AuthStatus = () => {
     );
 
   return (
-    <LogoutButton>
-      <div className="nav-link text-[16.5px]">Logout</div>
-    </LogoutButton>
+    <Box>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Text>
+            <Avatar
+              src={user!.image!}
+              fallback="U"
+              size="2"
+              radius="full"
+              className="cursor-pointer"
+              referrerPolicy="no-referrer"
+            />
+          </Text>
+        </DropdownMenu.Trigger>
+
+        <DropdownMenu.Content
+          size="2"
+          className="!relative mr-3 mt-3 2xl:mr-[225px]"
+        >
+          <DropdownMenu.Label>
+            <Text size="2">{user!.email}</Text>
+          </DropdownMenu.Label>
+          <LogoutButton>
+            <DropdownMenu.Item>
+              <div className="flex gap-2">
+                <RxExit /> Log out
+              </div>
+            </DropdownMenu.Item>
+          </LogoutButton>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </Box>
   );
 };
 
