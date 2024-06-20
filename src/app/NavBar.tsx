@@ -1,6 +1,9 @@
 'use client';
 
+import {LogoutButton} from '@/components/auth/LogoutButton';
+import Skeleton from '@/components/Skeleton';
 import {ThemeSwitch} from '@/components/ThemeSwitch';
+import {useCurrentUser} from '@/hooks/useCurrentUser';
 import {Container, Flex} from '@radix-ui/themes';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -11,20 +14,16 @@ const NavBar = () => {
   return (
     <nav className="sticky top-0 z-10 border-b px-5 py-3 backdrop-blur-sm dark:border-zinc-800">
       <Container>
-        <Flex justify="between">
+        <Flex justify="between" minHeight="32px">
           <Flex align="center" gap="5">
             <Link href="/" className="mr-0.5">
-              <AiFillBug size="18" />
+              <AiFillBug size="19" />
             </Link>
             <Navlinks />
           </Flex>
           <Flex align="center" gap="5">
             <ThemeSwitch />
-            <span className="nav-link">
-              <Link href="/auth/login" className="nav-link">
-                Login
-              </Link>
-            </span>
+            <AuthStatus />
           </Flex>
         </Flex>
       </Container>
@@ -47,7 +46,7 @@ const Navlinks = () => {
           <Link
             href={link.href}
             className={classNames({
-              'nav-link': true,
+              'nav-link text-[16.5px]': true,
               '!text-zinc-900 dark:!text-zinc-50': link.href === currentPath,
             })}
           >
@@ -56,6 +55,24 @@ const Navlinks = () => {
         </li>
       ))}
     </ul>
+  );
+};
+
+const AuthStatus = () => {
+  const {status, user} = useCurrentUser();
+
+  if (status === 'loading') return <Skeleton width="3rem" />;
+  if (status === 'unauthenticated')
+    return (
+      <Link href="/auth/login" className="nav-link text-[16.5px]">
+        Login
+      </Link>
+    );
+
+  return (
+    <LogoutButton>
+      <div className="nav-link text-[16.5px]">Logout</div>
+    </LogoutButton>
   );
 };
 
