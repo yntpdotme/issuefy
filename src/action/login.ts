@@ -25,13 +25,14 @@ export const login = async (
   try {
     const {email, password} = data;
 
-    await signIn('credentials', {
+    const redirect = await signIn('credentials', {
       email,
       password,
+      redirect: false,
       redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
 
-    return {success: 'Success'};
+    return {success: 'Success', redirect};
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

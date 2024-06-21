@@ -84,7 +84,7 @@ const AuthStatus = () => {
           <Text>
             <Avatar
               src={user!.image!}
-              fallback="U"
+              fallback={user?.name?.charAt(0) || 'U'}
               size="2"
               radius="full"
               className="cursor-pointer"
@@ -95,6 +95,7 @@ const AuthStatus = () => {
 
         <DropdownMenu.Content
           size="2"
+          variant="soft"
           className="!relative mr-3 mt-3 2xl:mr-[225px]"
         >
           <DropdownMenu.Label>

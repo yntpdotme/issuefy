@@ -25,10 +25,14 @@ export const ThemeSwitch = () => {
     );
 
   if (resolvedTheme === 'dark') {
-    return <FiSun onClick={() => setTheme('light')} className="nav-link scale-110" />;
+    return (
+      <FiSun onClick={() => setTheme('light')} className="nav-link scale-110" />
+    );
   }
 
   if (resolvedTheme === 'light') {
-    return <FiMoon onClick={() => setTheme('dark')} className="nav-link scale-110" />;
+    return (
+      <FiMoon onClick={() => setTheme('dark')} className="nav-link scale-110" />
+    );
   }
 };

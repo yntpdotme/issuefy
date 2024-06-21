@@ -12,12 +12,13 @@ import {Input} from '@/components/ui/Input';
 import {LoginSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
-import {useSearchParams} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
 export const LoginForm = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const urlError =
@@ -50,12 +51,12 @@ export const LoginForm = () => {
     startTransition(async () => {
       const res = await login(data, callbackUrl);
       if (res?.error) {
-        reset();
         setError(res.error);
       }
       if (res?.success) {
         reset();
-        setSuccess(res?.success);
+        router.push(res.redirect);
+        setSuccess(res.success);
       }
     });
   };
