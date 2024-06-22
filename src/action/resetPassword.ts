@@ -16,6 +16,10 @@ export const resetPassword = async (
   const existingUser = await getUserByEmail(data.email);
   if (!existingUser) return {error: 'Email not found'};
 
+  if (existingUser.email === process.env.GUEST_EMAIL) {
+    return {error: `Password reset isn't allowed for Guest Users.`};
+  }
+
   const passwordResetToken = await generatePasswordResetToken(
     existingUser.email,
   );
