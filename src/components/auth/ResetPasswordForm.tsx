@@ -1,6 +1,5 @@
 'use client';
 
-import {resetPassword} from '@/action/resetPassword';
 import {CardWrapper} from '@/components/auth/CardWrapper';
 import {FormError} from '@/components/FormError';
 import {FormSuccess} from '@/components/FormSuccess';
@@ -8,6 +7,7 @@ import {FormItem} from '@/components/ui/FormItem';
 import {FormMessage} from '@/components/ui/FormMessage';
 import {Input} from '@/components/ui/Input';
 import {ResetPasswordSchema} from '@/schemas';
+import {resetPassword} from '@/server/actions/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
 import {useEffect, useState, useTransition} from 'react';

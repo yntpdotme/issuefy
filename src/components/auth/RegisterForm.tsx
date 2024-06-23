@@ -1,6 +1,5 @@
 'use client';
 
-import {register as signup} from '@/action/register';
 import {CardWrapper} from '@/components/auth/CardWrapper';
 import {PasswordInput} from '@/components/auth/PasswordInput';
 import {FormError} from '@/components/FormError';
@@ -9,6 +8,7 @@ import {FormItem} from '@/components/ui/FormItem';
 import {FormMessage} from '@/components/ui/FormMessage';
 import {Input} from '@/components/ui/Input';
 import {RegisterSchema} from '@/schemas';
+import {register as signup} from '@/server/actions/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
 import {useEffect, useState, useTransition} from 'react';

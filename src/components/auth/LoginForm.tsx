@@ -1,6 +1,5 @@
 'use client';
 
-import {login} from '@/action/login';
 import {BackButton} from '@/components/auth/BackButton';
 import {CardWrapper} from '@/components/auth/CardWrapper';
 import {PasswordInput} from '@/components/auth/PasswordInput';
@@ -10,6 +9,7 @@ import {FormItem} from '@/components/ui/FormItem';
 import {FormMessage} from '@/components/ui/FormMessage';
 import {Input} from '@/components/ui/Input';
 import {LoginSchema} from '@/schemas';
+import {login} from '@/server/actions/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
 import {useRouter, useSearchParams} from 'next/navigation';

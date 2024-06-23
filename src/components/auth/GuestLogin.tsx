@@ -1,11 +1,11 @@
 'use client';
 
-import {guestLogin} from '@/action/guestLogin';
+import {FormError} from '@/components/FormError';
+import {FormSuccess} from '@/components/FormSuccess';
+import {guestLogin} from '@/server/actions/auth';
 import {Button} from '@radix-ui/themes';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {useState, useTransition} from 'react';
-import {FormSuccess} from '@/components/FormSuccess';
-import {FormError} from '@/components/FormError';
 
 export const GuestLogin = () => {
   const router = useRouter();

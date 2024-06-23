@@ -5,4 +5,3 @@ export const useCurrentUser = () => {
 
   return {status: session.status, user: session.data?.user};
 };
- 

@@ -1,5 +1,5 @@
-import {getPasswordResetTokenByEmail} from '@/data/passwordResetToken';
 import prisma from '@/prisma/client';
+import {getPasswordResetTokenByEmail} from '@/server/db/passwordResetToken';
 import ms from 'ms';
 import {v4 as uuidv4} from 'uuid';
 
