@@ -11,7 +11,7 @@ import {NewPasswordSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
 import {useSearchParams} from 'next/navigation';
-import {useState, useTransition} from 'react';
+import {useEffect, useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
@@ -26,6 +26,7 @@ export const NewPasswordForm = () => {
   const {
     handleSubmit,
     register,
+    setFocus,
     formState: {errors},
   } = useForm<z.infer<typeof NewPasswordSchema>>({
     resolver: zodResolver(NewPasswordSchema),
@@ -34,6 +35,10 @@ export const NewPasswordForm = () => {
     },
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    setFocus('password');
+  }, [setFocus]);
 
   const onSubmit = (value: z.infer<typeof NewPasswordSchema>) => {
     setError('');

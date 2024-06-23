@@ -10,7 +10,7 @@ import {Input} from '@/components/ui/Input';
 import {ResetPasswordSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
-import {useState, useTransition} from 'react';
+import {useEffect, useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
@@ -22,6 +22,7 @@ export const ResetPasswordForm = () => {
   const {
     handleSubmit,
     register,
+    setFocus,
     formState: {errors},
   } = useForm<z.infer<typeof ResetPasswordSchema>>({
     resolver: zodResolver(ResetPasswordSchema),
@@ -30,6 +31,10 @@ export const ResetPasswordForm = () => {
     },
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    setFocus('email');
+  }, [setFocus]);
 
   const onSubmit = (values: z.infer<typeof ResetPasswordSchema>) => {
     setError('');

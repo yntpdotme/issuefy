@@ -11,7 +11,7 @@ import {Input} from '@/components/ui/Input';
 import {RegisterSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
-import {useState, useTransition} from 'react';
+import {useEffect, useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
@@ -23,6 +23,7 @@ export const RegisterForm = () => {
   const {
     handleSubmit,
     register,
+    setFocus,
     formState: {errors},
   } = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -33,6 +34,10 @@ export const RegisterForm = () => {
     },
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    setFocus('name');
+  }, [setFocus]);
 
   const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
     setError('');

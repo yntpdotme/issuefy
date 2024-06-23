@@ -13,7 +13,7 @@ import {LoginSchema} from '@/schemas';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {useState, useTransition} from 'react';
+import {useEffect, useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
@@ -34,6 +34,7 @@ export const LoginForm = () => {
     handleSubmit,
     register,
     formState: {errors},
+    setFocus,
     reset,
   } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -43,6 +44,10 @@ export const LoginForm = () => {
     },
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    setFocus('email');
+  }, [setFocus]);
 
   const onSubmit = (data: z.infer<typeof LoginSchema>) => {
     setError('');
