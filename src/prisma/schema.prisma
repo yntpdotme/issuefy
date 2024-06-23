@@ -17,6 +17,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   password      String?
+  Issue         Issue[]
 }
 
 model Account {
@@ -47,4 +48,22 @@ model PasswordResetToken {
   expires DateTime
 
   @@unique([email, token])
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+model Issue {
+  id               Int      @id @default(autoincrement())
+  title            String
+  description      String
+  status           Status   @default(OPEN)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  assignedToUserId String?
+  assignedToUser   User?    @relation(fields: [userId], references: [id])
+  userId           String?
 }
