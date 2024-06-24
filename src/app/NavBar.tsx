@@ -20,7 +20,7 @@ import {RxExit} from 'react-icons/rx';
 
 const NavBar = () => {
   return (
-    <nav className="sticky top-0 z-10 border-b px-5 py-3 backdrop-blur-sm dark:border-zinc-800">
+    <nav className="sticky top-0 border-b px-5 py-3 backdrop-blur-sm dark:border-zinc-800">
       <Container>
         <Flex justify="between" minHeight="32px">
           <Flex align="center" gap="5">
@@ -96,14 +96,14 @@ const AuthStatus = () => {
         <DropdownMenu.Content
           size="2"
           variant="soft"
-          className="!relative mr-3 mt-3 2xl:mr-[225px]"
+          className="!relative mr-3 mt-3.5 2xl:mr-[225px]"
         >
           <DropdownMenu.Label>
             <Text size="2">{user!.email}</Text>
           </DropdownMenu.Label>
           <LogoutButton>
             <DropdownMenu.Item>
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
                 <RxExit /> Log out
               </div>
             </DropdownMenu.Item>

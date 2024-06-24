@@ -1,14 +1,14 @@
 'use client';
 
-import {useSession} from 'next-auth/react';
+import {Button} from '@radix-ui/themes';
+import Link from 'next/link';
 
 const IssuesPage = () => {
-  const session = useSession();
-
   return (
     <>
-      <div>Issues Page</div>
-      <div>User: {JSON.stringify(session.data?.user)}</div>
+      <Button>
+        <Link href="/issues/new">New Issue</Link>
+      </Button>
     </>
   );
 };

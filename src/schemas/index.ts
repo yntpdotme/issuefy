@@ -1,3 +1,4 @@
+import {Status} from '@prisma/client';
 import {z} from 'zod';
 
 export const LoginSchema = z.object({
@@ -28,3 +29,11 @@ export const NewPasswordSchema = z.object({
     message: 'Minimum 6 characters required',
   }),
 });
+
+export const IssueSchema = z
+  .object({
+    title: z.string().min(1, 'Title is required').max(255),
+    description: z.string().min(1, 'Description is required').max(65535),
+    status: z.nativeEnum(Status).optional(),
+  })
+  .strict();
