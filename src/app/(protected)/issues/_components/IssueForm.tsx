@@ -2,6 +2,7 @@
 
 import {FormMessage} from '@/components/ui/FormMessage';
 import {IssueSchema} from '@/schemas';
+import {createIssue} from '@/server/actions/issues';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button, TextField} from '@radix-ui/themes';
 import 'easymde/dist/easymde.min.css';
@@ -20,7 +21,7 @@ const IssueForm = () => {
   });
 
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
+    await createIssue(data);
   });
 
   return (
