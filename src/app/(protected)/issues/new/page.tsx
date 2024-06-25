@@ -1,7 +1,7 @@
-import IssueForm from '@/app/(protected)/issues/_components/IssueForm';
+import NewIssueWrapper from './NewIssueWrapper';
 
 const NewIssuePage = () => {
-  return <IssueForm />;
+  return <NewIssueWrapper />;
 };
 
 export const metadata = {
