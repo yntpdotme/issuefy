@@ -1,31 +1,43 @@
 'use client';
 
+import {FormError} from '@/components/FormError';
 import {FormMessage} from '@/components/ui/FormMessage';
 import {IssueSchema} from '@/schemas';
 import {createIssue} from '@/server/actions/issues';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button, TextField} from '@radix-ui/themes';
 import 'easymde/dist/easymde.min.css';
+import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import SimpleMDE from 'react-simplemde-editor';
 import {z} from 'zod';
 
 const IssueForm = () => {
+  const [error, setError] = useState('');
+
   const {
     register,
     control,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isSubmitting},
   } = useForm<z.infer<typeof IssueSchema>>({
     resolver: zodResolver(IssueSchema),
   });
 
   const onSubmit = handleSubmit(async data => {
-    await createIssue(data);
+    setError('');
+
+    try {
+      const result = await createIssue(data);
+    } catch (error) {
+      setError('An unexpected Error Occurred');
+    }
   });
 
   return (
     <div className="max-w-xl">
+      {error && <FormError message={String(error)} />}
+
       <form className="mt-5 space-y-3" onSubmit={onSubmit}>
         <TextField.Root placeholder="Title" {...register('title')} />
         <FormMessage error={errors.title?.message} />
@@ -43,7 +55,7 @@ const IssueForm = () => {
         />
         <FormMessage error={errors.description?.message} />
 
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>Submit New Issue</Button>
       </form>
     </div>
   );

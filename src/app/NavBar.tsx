@@ -103,7 +103,7 @@ const AuthStatus = () => {
           </DropdownMenu.Label>
           <LogoutButton>
             <DropdownMenu.Item>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 <RxExit /> Log out
               </div>
             </DropdownMenu.Item>
