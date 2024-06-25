@@ -1,6 +1,7 @@
 'use client';
 
 import {FormError} from '@/components/FormError';
+import {Spinner} from '@/components/Spinner';
 import {FormMessage} from '@/components/ui/FormMessage';
 import {IssueSchema} from '@/schemas';
 import {createIssue} from '@/server/actions/issues';
@@ -55,7 +56,9 @@ const IssueForm = () => {
         />
         <FormMessage error={errors.description?.message} />
 
-        <Button disabled={isSubmitting}>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
