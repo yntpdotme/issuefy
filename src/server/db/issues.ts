@@ -6,3 +6,11 @@ export const createIssue = async (issue: Prisma.IssueCreateInput) => {
 
   return newIssue;
 };
+
+export const getIssues = async () => {
+  const issues = await prisma.issue.findMany({
+    orderBy: {createdAt: 'desc'},
+  });
+
+  return issues;
+};
