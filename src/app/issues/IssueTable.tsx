@@ -1,7 +1,7 @@
 import {IssueStatusBadge} from '@/components/IssueStatusBadge';
 import {Issue} from '@prisma/client';
 import {Table} from '@radix-ui/themes';
-import Link from 'next/link';
+import {IssueLink} from './IssueLink';
 
 type Props = {
   issues: Issue[];
@@ -32,7 +32,7 @@ export const IssueTable = ({issues}: Props) => {
         {issues?.map(issue => (
           <Table.Row key={issue.id}>
             <Table.Cell>
-              <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+              <IssueLink href={`/issues/${issue.id}`}>{issue.title}</IssueLink>
               <div className="block md:hidden">
                 <IssueStatusBadge status={issue.status} />
               </div>
