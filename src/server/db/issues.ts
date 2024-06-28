@@ -14,3 +14,11 @@ export const getIssues = async () => {
 
   return issues;
 };
+
+export const getIssue = async (id: number) => {
+  const issue = await prisma.issue.findUnique({
+    where: {id},
+  });
+
+  return issue;
+};
