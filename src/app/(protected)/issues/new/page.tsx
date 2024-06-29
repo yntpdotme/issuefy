@@ -5,7 +5,7 @@ const NewIssuePage = () => {
 };
 
 export const metadata = {
-  title: 'New Issue',
+  title: 'Issuefy · Create new issue',
   description: 'Create a new issue',
 };
 
