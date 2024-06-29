@@ -22,3 +22,15 @@ export const getIssue = async (id: number) => {
 
   return issue;
 };
+
+export const updateIssue = async (
+  id: number,
+  issue: Prisma.IssueUpdateInput,
+) => {
+  const updatedIssue = await prisma.issue.update({
+    where: {id},
+    data: issue,
+  });
+
+  return updatedIssue;
+};

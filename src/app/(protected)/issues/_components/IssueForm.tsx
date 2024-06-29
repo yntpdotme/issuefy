@@ -4,11 +4,12 @@ import {FormError} from '@/components/FormError';
 import {Spinner} from '@/components/Spinner';
 import {FormMessage} from '@/components/ui/FormMessage';
 import {IssueSchema} from '@/schemas';
-import {createIssue} from '@/server/actions/issues';
+import {createIssue, editIssue} from '@/server/actions/issues';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Issue} from '@prisma/client';
 import {Button, TextField} from '@radix-ui/themes';
 import 'easymde/dist/easymde.min.css';
+import {isRedirectError} from 'next/dist/client/components/redirect';
 import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import SimpleMDE from 'react-simplemde-editor';
@@ -35,10 +36,12 @@ const IssueForm = ({issue}: Props) => {
     setError('');
 
     try {
-      if (issue) await setTimeout(() => {}, 2000);
+      if (issue) await editIssue(issue.id, data);
       else await createIssue(data);
     } catch (error) {
-      setError('An unexpected Error Occurred');
+      if (!isRedirectError(error)) {
+        setError('An unexpected Error Occurred');
+      }
     }
   });
 
