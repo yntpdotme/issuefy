@@ -34,3 +34,7 @@ export const updateIssue = async (
 
   return updatedIssue;
 };
+
+export const deleteIssue = async (id: number) => {
+  await prisma.issue.delete({where: {id}});
+};

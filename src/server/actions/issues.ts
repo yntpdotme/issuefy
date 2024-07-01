@@ -4,6 +4,7 @@ import {auth} from '@/auth';
 import {IssueSchema} from '@/schemas';
 import {
   createIssue as createIssueDB,
+  deleteIssue as deleteIssueDB,
   updateIssue as updateIssueDB,
 } from '@/server/db/issues';
 import {redirect} from 'next/navigation';
@@ -50,4 +51,19 @@ export const editIssue = async (
   }
 
   redirect(`/issues/${updatedIssue.id}`);
+};
+
+export const deleteIssue = async (id: number) => {
+  const session = auth();
+  if (!session) return {error: 'Unauthorized'};
+
+  try {
+    await deleteIssueDB(id);
+  } catch (error) {
+    console.error('Error in deleting issue:', error);
+
+    throw new Error('An unexpected Error Occurred');
+  }
+
+  redirect(`/issues`);
 };

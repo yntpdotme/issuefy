@@ -1,6 +1,8 @@
 'use client';
 import {Spinner} from '@/components/Spinner';
+import {deleteIssue} from '@/server/actions/issues';
 import {AlertDialog, Button, Flex} from '@radix-ui/themes';
+import {isRedirectError} from 'next/dist/client/components/redirect';
 import {useState} from 'react';
 import {MdDelete} from 'react-icons/md';
 
@@ -8,8 +10,16 @@ const DeleteIssueButton = ({issueId}: {issueId: number}) => {
   const [error, setError] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
 
-  const deleteIssue = async () => {
-    setError(true);
+  const onDelete = async () => {
+    try {
+      setDeleting(true);
+      await deleteIssue(issueId);
+    } catch (error) {
+      if (!isRedirectError(error)) {
+        setDeleting(false);
+        setError(true);
+      }
+    }
   };
 
   return (
@@ -37,7 +47,7 @@ const DeleteIssueButton = ({issueId}: {issueId: number}) => {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button variant="solid" color="red" onClick={deleteIssue}>
+              <Button variant="solid" color="red" onClick={onDelete}>
                 Delete Issue
               </Button>
             </AlertDialog.Action>
