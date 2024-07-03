@@ -1,12 +1,13 @@
 import {auth} from '@/auth';
 import {getIssue} from '@/server/db/issues';
+import {getUserNames} from '@/server/db/users';
 import {Box, Flex, Grid} from '@radix-ui/themes';
 import {Metadata} from 'next';
 import {notFound} from 'next/navigation';
+import AssigneeSelect from './AssigneeSelect';
 import DeleteIssueButton from './DeleteIssueButton';
 import {EditIssueButton} from './EditIssueButton';
 import {IssueDetails} from './IssueDetails';
-import AssigneeSelect from './AssigneeSelect';
 
 type Props = {
   params: Promise<{id: string}>;
@@ -21,6 +22,8 @@ const IssueDetailPage = async ({params}: Props) => {
   const issue = await getIssue(issueId);
   if (!issue) notFound();
 
+  const users = await getUserNames();
+
   return (
     <Grid columns={{initial: '1', sm: '5'}} gap="5">
       <Box className="md:col-span-4">
@@ -29,7 +32,7 @@ const IssueDetailPage = async ({params}: Props) => {
       {session && (
         <Box>
           <Flex direction="column" gap="4">
-            <AssigneeSelect issue={issue}/>
+            <AssigneeSelect issue={issue} users={users} />
             <EditIssueButton issueId={issue.id} />
             <DeleteIssueButton issueId={issue.id} />
           </Flex>
