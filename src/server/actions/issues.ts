@@ -11,7 +11,7 @@ import {redirect} from 'next/navigation';
 import {z} from 'zod';
 
 export const createIssue = async (values: z.infer<typeof IssueSchema>) => {
-  const session = auth();
+  const session = await auth();
   if (!session) return {error: 'Unauthorized'};
 
   const {success, data} = IssueSchema.safeParse(values);
@@ -34,7 +34,7 @@ export const editIssue = async (
   id: number,
   values: z.infer<typeof IssueSchema>,
 ) => {
-  const session = auth();
+  const session = await auth();
   if (!session) return {error: 'Unauthorized'};
 
   const {success, data} = IssueSchema.safeParse(values);
@@ -54,7 +54,7 @@ export const editIssue = async (
 };
 
 export const deleteIssue = async (id: number) => {
-  const session = auth();
+  const session = await auth();
   if (!session) return {error: 'Unauthorized'};
 
   try {
@@ -69,7 +69,7 @@ export const deleteIssue = async (id: number) => {
 };
 
 export const assignIssue = async (id: number, userId: string) => {
-  const session = auth();
+  const session = await auth();
   if (!session) return {error: 'Unauthorized'};
 
   try {
