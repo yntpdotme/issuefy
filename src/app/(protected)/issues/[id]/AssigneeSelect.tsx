@@ -1,7 +1,9 @@
 'use client';
 
+import {assignIssue} from '@/server/actions/issues';
 import {Issue} from '@prisma/client';
 import {ScrollArea, Select} from '@radix-ui/themes';
+import toast, {Toaster} from 'react-hot-toast';
 
 type Props = {
   issue: Issue;
@@ -9,15 +11,19 @@ type Props = {
 };
 
 const AssigneeSelect = ({issue, users}: Props) => {
-  const assignIssue = async (userId: string) => {
-    console.log(userId);
+  const assignIssueToUser = async (userId: string) => {
+    try {
+      await assignIssue(issue.id, userId);
+    } catch (error) {
+      toast.error('Changes cloud not be saved');
+    }
   };
 
   return (
     <>
       <Select.Root
         defaultValue={issue.assignedToUserId || 'unassign'}
-        onValueChange={assignIssue}
+        onValueChange={assignIssueToUser}
       >
         <Select.Trigger placeholder="Assign..." />
         <Select.Content
@@ -42,6 +48,14 @@ const AssigneeSelect = ({issue, users}: Props) => {
           </Select.Group>
         </Select.Content>
       </Select.Root>
+
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: 'dark:bg-black dark:text-white',
+        }}
+      />
     </>
   );
 };

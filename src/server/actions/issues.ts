@@ -67,3 +67,21 @@ export const deleteIssue = async (id: number) => {
 
   redirect(`/issues`);
 };
+
+export const assignIssue = async (id: number, userId: string) => {
+  const session = auth();
+  if (!session) return {error: 'Unauthorized'};
+
+  try {
+    const issue =
+      userId === 'unassign'
+        ? {assignedToUser: {disconnect: true}}
+        : {assignedToUser: {connect: {id: userId}}};
+
+    await updateIssueDB(id, issue);
+  } catch (error) {
+    console.error('Error in assigning issue:', error);
+
+    throw new Error('An unexpected Error Occurred');
+  }
+};
