@@ -1,5 +1,5 @@
 import prisma from '@/prisma/client';
-import {Prisma} from '@prisma/client';
+import {Prisma, Status} from '@prisma/client';
 
 export const createIssue = async (issue: Prisma.IssueCreateInput) => {
   const newIssue = await prisma.issue.create({data: issue});
@@ -7,8 +7,9 @@ export const createIssue = async (issue: Prisma.IssueCreateInput) => {
   return newIssue;
 };
 
-export const getIssues = async () => {
+export const getIssues = async (status?: Status) => {
   const issues = await prisma.issue.findMany({
+    where: {status},
     orderBy: {createdAt: 'desc'},
   });
 
