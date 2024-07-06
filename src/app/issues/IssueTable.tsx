@@ -5,13 +5,13 @@ import NextLink from 'next/link';
 import {RxCaretSort} from 'react-icons/rx';
 import {IssueLink} from './IssueLink';
 
-type SearchParams = Promise<{
+export type IssueQuery = Promise<{
   status: Status;
   orderBy: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
 }>;
 
 type Props = {
-  searchParmas: SearchParams;
+  searchParmas: IssueQuery;
   issues: Issue[];
 };
 

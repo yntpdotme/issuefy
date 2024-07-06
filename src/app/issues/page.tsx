@@ -1,23 +1,27 @@
 import {getIssues} from '@/server/db/issues';
-import {Issue, Status} from '@prisma/client';
+import {Status} from '@prisma/client';
 import {Button, Flex} from '@radix-ui/themes';
+import {Metadata} from 'next';
 import Link from 'next/link';
 import {IssueStatusFilter} from './IssueStatusFilter';
-import {IssueTable} from './IssueTable';
+import {columnNames, IssueQuery, IssueTable} from './IssueTable';
 
-type SearchParams = Promise<{
-  status: Status;
-  orderBy: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
-}>;
+type Props = {
+  searchParams: IssueQuery;
+};
 
-const IssuesPage = async ({searchParams}: {searchParams: SearchParams}) => {
+const IssuesPage = async ({searchParams}: Props) => {
   const queryParams = await searchParams;
 
   const status = Object.values(Status).includes(queryParams.status)
     ? queryParams.status
     : undefined;
 
-  const issues = await getIssues(status);
+  const orderBy = columnNames.includes(queryParams.orderBy)
+    ? queryParams.orderBy
+    : undefined;
+
+  const issues = await getIssues(status, orderBy);
 
   return (
     <Flex direction="column" gap="18px">
@@ -32,6 +36,11 @@ const IssuesPage = async ({searchParams}: {searchParams: SearchParams}) => {
       <IssueTable searchParmas={searchParams} issues={issues} />
     </Flex>
   );
+};
+
+export const metadata: Metadata = {
+  title: 'Issuefy · Issue list',
+  description: 'View all project issues',
 };
 
 export default IssuesPage;
