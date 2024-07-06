@@ -1,11 +1,14 @@
 import {getIssues} from '@/server/db/issues';
-import {Status} from '@prisma/client';
+import {Issue, Status} from '@prisma/client';
 import {Button, Flex} from '@radix-ui/themes';
 import Link from 'next/link';
 import {IssueStatusFilter} from './IssueStatusFilter';
 import {IssueTable} from './IssueTable';
 
-type SearchParams = Promise<{status: Status}>;
+type SearchParams = Promise<{
+  status: Status;
+  orderBy: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
+}>;
 
 const IssuesPage = async ({searchParams}: {searchParams: SearchParams}) => {
   const queryParams = await searchParams;
@@ -26,7 +29,7 @@ const IssuesPage = async ({searchParams}: {searchParams: SearchParams}) => {
         </Button>
       </Flex>
 
-      <IssueTable issues={issues} />
+      <IssueTable searchParmas={searchParams} issues={issues} />
     </Flex>
   );
 };

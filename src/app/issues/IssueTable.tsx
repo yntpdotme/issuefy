@@ -1,19 +1,35 @@
 import {IssueStatusBadge} from '@/components/IssueStatusBadge';
-import {Issue} from '@prisma/client';
+import {Issue, Status} from '@prisma/client';
 import {Table} from '@radix-ui/themes';
+import NextLink from 'next/link';
+import {RxCaretSort} from 'react-icons/rx';
 import {IssueLink} from './IssueLink';
 
+type SearchParams = Promise<{
+  status: Status;
+  orderBy: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
+}>;
+
 type Props = {
+  searchParmas: SearchParams;
   issues: Issue[];
 };
 
-const columns: {label: string; value: keyof Issue; className?: string}[] = [
+const columns: {
+  label: string;
+  value: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
+  className?: string;
+}[] = [
   {label: 'Issue', value: 'title'},
   {label: 'Status', value: 'status', className: 'hidden md:table-cell'},
   {label: 'Created', value: 'createdAt', className: 'hidden md:table-cell'},
 ];
 
-export const IssueTable = ({issues}: Props) => {
+export const columnNames = columns.map(column => column.value);
+
+export const IssueTable = async ({searchParmas, issues}: Props) => {
+  const queryParams = await searchParmas;
+
   return (
     <Table.Root variant="surface">
       <Table.Header>
@@ -23,7 +39,16 @@ export const IssueTable = ({issues}: Props) => {
               key={column.value}
               className={column.className}
             >
-              {column.label}
+              <NextLink
+                href={{
+                  query: {...queryParams, orderBy: column.value},
+                }}
+              >
+                {column.label}
+                {column.value === queryParams?.orderBy && (
+                  <RxCaretSort className="inline" />
+                )}
+              </NextLink>
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>
