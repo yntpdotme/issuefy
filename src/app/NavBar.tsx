@@ -20,7 +20,7 @@ import {RxExit} from 'react-icons/rx';
 
 const NavBar = () => {
   return (
-    <nav className="sticky top-0 border-b px-5 py-3 backdrop-blur-sm dark:border-zinc-800">
+    <nav className="sticky top-0 border-b px-5 py-3 backdrop-blur-md dark:border-zinc-800 z-[5]">
       <Container>
         <Flex justify="between" minHeight="32px">
           <Flex align="center" gap="5">

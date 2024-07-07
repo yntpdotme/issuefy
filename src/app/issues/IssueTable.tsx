@@ -1,4 +1,5 @@
 import {IssueStatusBadge} from '@/components/IssueStatusBadge';
+import {Pagination} from '@/components/Pagination';
 import {Issue, Status} from '@prisma/client';
 import {Table} from '@radix-ui/themes';
 import NextLink from 'next/link';
@@ -79,6 +80,9 @@ export const IssueTable = async ({searchParmas, issues}: Props) => {
             </Table.Cell>
           </Table.Row>
         ))}
+        <Table.Row>
+          <Pagination itemCount={100} pageSize={10} currentPage={1} />
+        </Table.Row>
       </Table.Body>
     </Table.Root>
   );
