@@ -81,7 +81,7 @@ export const IssueTable = async ({searchParmas, issues}: Props) => {
           </Table.Row>
         ))}
         <Table.Row>
-          <Pagination itemCount={100} pageSize={10} currentPage={1} />
+          <Pagination itemCount={100} pageSize={10} currentPage={8} />
         </Table.Row>
       </Table.Body>
     </Table.Root>
