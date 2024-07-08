@@ -9,11 +9,17 @@ import {IssueLink} from './IssueLink';
 export type IssueQuery = Promise<{
   status: Status;
   orderBy: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
+  page: string;
 }>;
 
 type Props = {
   searchParmas: IssueQuery;
-  issues: Issue[];
+  issues: {
+    data: Issue[];
+    currentPage: number;
+    pageSize: number;
+    totalIssues: number;
+  };
 };
 
 const columns: {
@@ -25,8 +31,6 @@ const columns: {
   {label: 'Status', value: 'status', className: 'hidden md:table-cell'},
   {label: 'Created', value: 'createdAt', className: 'hidden md:table-cell'},
 ];
-
-export const columnNames = columns.map(column => column.value);
 
 export const IssueTable = async ({searchParmas, issues}: Props) => {
   const queryParams = await searchParmas;
@@ -55,7 +59,7 @@ export const IssueTable = async ({searchParmas, issues}: Props) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {issues?.map(issue => (
+        {issues.data?.map(issue => (
           <Table.Row key={issue.id}>
             <Table.Cell>
               <IssueLink href={`/issues/${issue.id}`}>{issue.title}</IssueLink>
@@ -81,9 +85,15 @@ export const IssueTable = async ({searchParmas, issues}: Props) => {
           </Table.Row>
         ))}
         <Table.Row>
-          <Pagination itemCount={100} pageSize={10} currentPage={8} />
+          <Pagination
+            pageSize={issues.pageSize}
+            currentPage={issues.currentPage}
+            itemCount={issues.totalIssues}
+          />
         </Table.Row>
       </Table.Body>
     </Table.Root>
   );
 };
+
+export const columnNames = columns.map(column => column.value);

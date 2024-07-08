@@ -7,15 +7,31 @@ export const createIssue = async (issue: Prisma.IssueCreateInput) => {
   return newIssue;
 };
 
-export const getIssues = async (status?: Status, orderBy?: keyof Issue) => {
+export const getIssues = async (
+  status?: Status,
+  orderBy?: keyof Issue,
+  page: number = 1,
+  pageSize: number = 10,
+) => {
   const issues = await prisma.issue.findMany({
     where: {status},
     orderBy: orderBy
       ? [{[orderBy]: 'asc'}, {createdAt: 'desc'}]
       : {createdAt: 'desc'},
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   });
 
-  return issues;
+  const totalIssues = await prisma.issue.count({
+    where: {status},
+  });
+
+  return {
+    data: issues,
+    currentPage: page,
+    pageSize,
+    totalIssues,
+  };
 };
 
 export const getIssue = async (id: number) => {

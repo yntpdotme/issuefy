@@ -21,7 +21,10 @@ const IssuesPage = async ({searchParams}: Props) => {
     ? queryParams.orderBy
     : undefined;
 
-  const issues = await getIssues(status, orderBy);
+  const page = parseInt(queryParams.page) || 1;
+  const pageSize = 10;
+
+  const issues = await getIssues(status, orderBy, page, pageSize);
 
   return (
     <Flex direction="column" gap="18px">
