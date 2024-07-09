@@ -1,0 +1,66 @@
+import {getIssuesWithUsers} from '@/server/db/issues';
+import {Status} from '@prisma/client';
+import {
+  Avatar,
+  Badge,
+  Card,
+  Flex,
+  Heading,
+  Text,
+  Tooltip,
+} from '@radix-ui/themes';
+import Link from 'next/link';
+
+const STATUS_COLORS: Record<Status, 'red' | 'purple' | 'green'> = {
+  OPEN: 'red',
+  IN_PROGRESS: 'purple',
+  CLOSED: 'green',
+};
+
+const StatusBadge = ({status}: {status: Status}) => (
+  <Tooltip content={status.toLowerCase().replace('_', ' ')}>
+    <Badge
+      color={STATUS_COLORS[status]}
+      variant="solid"
+      radius="full"
+      className="scale-75 py-1.5"
+    />
+  </Tooltip>
+);
+
+export const LatestIssues = async () => {
+  const {data: issues} = await getIssuesWithUsers({
+    pageSize: 5,
+    includeUser: true,
+  });
+
+  return (
+    <Card>
+      <Heading size="4" m="3">
+        Latest Issues
+      </Heading>
+      <Flex direction="column" gap="3" m="4">
+        {issues?.map(issue => (
+          <Flex key={issue.id} gap="2" align="center">
+            <Flex gap="3" align="center" className="flex-1">
+              <StatusBadge status={issue.status} />
+              <Link href={`/issues/${issue.id}`}>
+                <Text truncate className="max-w-[300px]">
+                  {issue.title}
+                </Text>
+              </Link>
+            </Flex>
+            {issue.assignedToUser && (
+              <Avatar
+                src={issue.assignedToUser.image!}
+                fallback={issue.assignedToUser?.name?.charAt(0) || 'U'}
+                size="1"
+                radius="medium"
+              />
+            )}
+          </Flex>
+        ))}
+      </Flex>
+    </Card>
+  );
+};

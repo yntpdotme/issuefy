@@ -8,11 +8,15 @@ export const createIssue = async (issue: Prisma.IssueCreateInput) => {
 };
 
 export const getIssues = async (
-  status?: Status,
-  orderBy?: keyof Issue,
-  page: number = 1,
-  pageSize: number = 10,
+  params: {
+    status?: Status;
+    orderBy?: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
+    page?: number;
+    pageSize?: number;
+  } = {},
 ) => {
+  const {status, orderBy, page = 1, pageSize = 10} = params;
+
   const issues = await prisma.issue.findMany({
     where: {status},
     orderBy: orderBy
@@ -56,4 +60,39 @@ export const updateIssue = async (
 
 export const deleteIssue = async (id: number) => {
   await prisma.issue.delete({where: {id}});
+};
+
+export const getIssuesWithUsers = async (
+  params: {
+    status?: Status;
+    orderBy?: keyof Pick<Issue, 'title' | 'status' | 'createdAt'>;
+    page?: number;
+    pageSize?: number;
+    includeUser?: boolean;
+  } = {},
+) => {
+  const {status, orderBy, page = 1, pageSize = 10, includeUser = true} = params;
+
+  const issues = await prisma.issue.findMany({
+    where: {status},
+    orderBy: orderBy
+      ? [{[orderBy]: 'asc'}, {createdAt: 'desc'}]
+      : {createdAt: 'desc'},
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+    include: {
+      assignedToUser: includeUser,
+    },
+  });
+
+  const totalIssues = await prisma.issue.count({
+    where: {status},
+  });
+
+  return {
+    data: issues,
+    currentPage: page,
+    pageSize,
+    totalIssues,
+  };
 };
