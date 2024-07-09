@@ -1,7 +1,7 @@
 import {IssueStatusBadge} from '@/components/IssueStatusBadge';
 import {Pagination} from '@/components/Pagination';
 import {Issue, Status} from '@prisma/client';
-import {Table} from '@radix-ui/themes';
+import {Flex, Table} from '@radix-ui/themes';
 import NextLink from 'next/link';
 import {RxCaretSort} from 'react-icons/rx';
 import {IssueLink} from './IssueLink';
@@ -62,10 +62,14 @@ export const IssueTable = async ({searchParmas, issues}: Props) => {
         {issues.data?.map(issue => (
           <Table.Row key={issue.id}>
             <Table.Cell>
-              <IssueLink href={`/issues/${issue.id}`}>{issue.title}</IssueLink>
-              <div className="block md:hidden">
-                <IssueStatusBadge status={issue.status} />
-              </div>
+              <Flex justify="between" gap="3">
+                <IssueLink href={`/issues/${issue.id}`}>
+                  {issue.title}
+                </IssueLink>
+                <div className="block md:hidden">
+                  <IssueStatusBadge status={issue.status} />
+                </div>
+              </Flex>
             </Table.Cell>
             <Table.Cell className="hidden md:table-cell">
               <IssueStatusBadge status={issue.status} />

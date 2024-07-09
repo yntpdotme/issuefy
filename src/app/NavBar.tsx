@@ -20,7 +20,7 @@ import {RxExit} from 'react-icons/rx';
 
 const NavBar = () => {
   return (
-    <nav className="sticky top-0 border-b px-5 py-3 backdrop-blur-md dark:border-zinc-800 z-[5]">
+    <nav className="sticky top-0 z-[5] border-b px-5 py-3 backdrop-blur-md dark:border-zinc-800">
       <Container>
         <Flex justify="between" minHeight="32px">
           <Flex align="center" gap="5">
@@ -48,7 +48,7 @@ const Navlinks = () => {
   ];
 
   return (
-    <ul className="flex space-x-6">
+    <ul className="flex space-x-7">
       {links.map((link, index) => (
         <li key={index}>
           <Link
@@ -86,7 +86,7 @@ const AuthStatus = () => {
               src={user!.image!}
               fallback={user?.name?.charAt(0) || 'U'}
               size="2"
-              radius="full"
+              radius="medium"
               className="cursor-pointer"
               referrerPolicy="no-referrer"
             />

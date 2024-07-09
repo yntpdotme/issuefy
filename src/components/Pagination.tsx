@@ -68,7 +68,7 @@ export const Pagination = ({itemCount, pageSize, currentPage}: Props) => {
         <HiMiniChevronDoubleRight className="size-5" />
       </Button>
 
-      <Text size="2" weight="bold" ml="2">
+      <Text size="2" weight="medium" ml="2">
         Page {currentPage} of {pageCount}
       </Text>
     </Flex>
