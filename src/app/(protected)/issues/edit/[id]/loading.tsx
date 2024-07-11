@@ -3,7 +3,7 @@ import {Box, Flex} from '@radix-ui/themes';
 
 const EditIssueSkeleton = () => {
   return (
-    <Box className="max-w-xl mt-5">
+    <Box className="mt-5 max-w-xl">
       <Skeleton height="2rem" />
       <Skeleton height="24rem" className="mt-3" />
       <Flex gap="4" mt="5">

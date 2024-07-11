@@ -34,6 +34,7 @@
     "react-loading-skeleton": "^3.5.0",
     "react-markdown": "^9.0.1",
     "react-simplemde-editor": "^5.2.0",
+    "recharts": "^2.14.1",
     "resend": "4.0.1-alpha.0",
     "uuid": "^11.0.3",
     "zod": "^3.23.8"
