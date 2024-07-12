@@ -46,10 +46,10 @@ const IssueForm = ({issue}: Props) => {
   });
 
   return (
-    <div className="max-w-xl">
+    <div className="max-w-xl mt-5">
       {error && <FormError message={String(error)} />}
 
-      <form className="mt-5 space-y-3" onSubmit={onSubmit}>
+      <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root
           placeholder="Title"
           defaultValue={issue?.title}

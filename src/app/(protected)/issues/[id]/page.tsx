@@ -25,7 +25,7 @@ const IssueDetailPage = async ({params}: Props) => {
   const users = await getUserNames();
 
   return (
-    <Grid columns={{initial: '1', sm: '5'}} gap="5">
+    <Grid columns={{initial: '1', sm: '5'}} gap="5" mt="20px">
       <Box className="md:col-span-4">
         <IssueDetails issue={issue} />
       </Box>

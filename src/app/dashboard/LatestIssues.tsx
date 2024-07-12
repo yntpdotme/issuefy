@@ -30,16 +30,16 @@ const StatusBadge = ({status}: {status: Status}) => (
 
 export const LatestIssues = async () => {
   const {data: issues} = await getIssuesWithUsers({
-    pageSize: 5,
+    pageSize: 10,
     includeUser: true,
   });
 
   return (
     <Card>
-      <Heading size="4" m="3">
+      <Heading size="5" m="3">
         Latest Issues
       </Heading>
-      <Flex direction="column" gap="3" m="4">
+      <Flex direction="column" gap="4" m="4" mt='5'>
         {issues?.map(issue => (
           <Flex key={issue.id} gap="2" align="center">
             <Flex gap="3" align="center" className="flex-1">

@@ -27,7 +27,7 @@ const IssuesPage = async ({searchParams}: Props) => {
   const issues = await getIssues({status, orderBy, page, pageSize});
 
   return (
-    <Flex direction="column" gap="18px">
+    <Flex direction="column" gap="5" mt="20px">
       <Flex justify="between">
         <IssueStatusFilter />
 

@@ -3,7 +3,7 @@ import {Box, Card, Flex, Grid} from '@radix-ui/themes';
 
 const LoadingIssueDetailPage = () => {
   return (
-    <Grid columns={{initial: '1', sm: '5'}} gap="5">
+    <Grid columns={{initial: '1', sm: '5'}} gap="5" mt="20px">
       <Box className="md:col-span-4">
         <Skeleton height="1.5rem" />
         <Flex gap="4" my="2">

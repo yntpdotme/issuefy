@@ -1,15 +1,24 @@
 import Skeleton from '@/components/Skeleton';
-import {Button, Flex, Table} from '@radix-ui/themes';
+import {Button, Flex, Select, Table} from '@radix-ui/themes';
 import Link from 'next/link';
 
 const LoadingIssuesPage = () => {
   const issues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <Flex direction="column" gap="18px">
-      <Button className="w-fit">
-        <Link href="/issues/new">New Issue</Link>
-      </Button>
+    <Flex direction="column" gap="5" mt="20px">
+      <Flex justify="between">
+        <Select.Root defaultValue="ALL">
+          <Select.Trigger placeholder="Filter by status..." />
+          <Select.Content position="popper">
+            <Select.Item value="ALL">All</Select.Item>
+          </Select.Content>
+        </Select.Root>
+
+        <Button className="w-fit">
+          <Link href="/issues/new">New Issue</Link>
+        </Button>
+      </Flex>
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>

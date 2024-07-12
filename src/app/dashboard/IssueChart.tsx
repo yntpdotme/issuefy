@@ -18,7 +18,7 @@ export const IssueChart = ({open, inProgress, closed}: Props) => {
 
   return (
     <Card>
-      <ResponsiveContainer height={350} className="mx-auto max-w-[510px]">
+      <ResponsiveContainer height={362} className="mx-auto max-w-[510px]">
         <BarChart
           data={data}
           margin={{
