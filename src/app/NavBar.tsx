@@ -7,6 +7,7 @@ import {useCurrentUser} from '@/hooks/useCurrentUser';
 import {
   Avatar,
   Box,
+  Button,
   Container,
   DropdownMenu,
   Flex,
@@ -72,9 +73,11 @@ const AuthStatus = () => {
   if (status === 'loading') return <Skeleton width="3rem" />;
   if (status === 'unauthenticated')
     return (
-      <Link href="/auth/login" className="nav-link text-[16.5px]">
-        Login
-      </Link>
+      <Button variant="surface">
+        <Link href="/auth/login" className="nav-link text-[16.5px]">
+          Login
+        </Link>
+      </Button>
     );
 
   return (
