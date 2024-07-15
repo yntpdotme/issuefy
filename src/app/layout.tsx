@@ -1,4 +1,5 @@
 import {auth} from '@/auth';
+import SourceCode from '@/components/source-code';
 import {Container, Theme} from '@radix-ui/themes';
 import type {Metadata} from 'next';
 import {SessionProvider} from 'next-auth/react';
@@ -30,6 +31,7 @@ export default async function RootLayout({
               <main className="flex-1 overflow-scroll p-5">
                 <Container>{children}</Container>
               </main>
+              <SourceCode link="https://github.com/issuefy" />
             </Theme>
           </ThemeProvider>
         </body>
