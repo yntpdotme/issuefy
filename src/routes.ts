@@ -30,3 +30,19 @@ export const apiAuthPrefix: string = '/api/auth';
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT: string = '/dashboard';
+
+/**
+ * Check if a route is public
+ * @param route - The route to check
+ * @returns boolean indicating if the route is public
+ */
+export function isPublicRoute(route: string): boolean {
+  if (publicRoutes.includes(route)) return true;
+
+  // Handle dynamic /issues/[id] route
+  if (route.startsWith('/issues/') && route.split('/').length === 3) {
+    return true;
+  }
+
+  return false;
+}
