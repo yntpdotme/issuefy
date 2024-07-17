@@ -25,7 +25,7 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning>
         <body className={`${inter.variable} h-screen antialiased`}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light">
             <Theme className="flex flex-col">
               <NavBar />
               <main className="flex-1 overflow-scroll p-5">
