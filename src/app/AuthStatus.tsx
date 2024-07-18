@@ -28,9 +28,8 @@ export const AuthStatus = ({session}: Props) => {
             <Avatar
               src={user!.image!}
               fallback={user?.name?.charAt(0) || 'U'}
-              size="2"
-              radius="medium"
-              className="cursor-pointer"
+              radius="small"
+              className="size-7 cursor-pointer"
               referrerPolicy="no-referrer"
             />
           </Text>

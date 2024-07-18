@@ -39,7 +39,7 @@ export const LatestIssues = async () => {
       <Heading size="5" m="3">
         Latest Issues
       </Heading>
-      <Flex direction="column" gap="4" m="4" mt='5'>
+      <Flex direction="column" gap="4" m="4" mt="5">
         {issues?.map(issue => (
           <Flex key={issue.id} gap="2" align="center">
             <Flex gap="3" align="center" className="flex-1">
@@ -55,7 +55,7 @@ export const LatestIssues = async () => {
                 src={issue.assignedToUser.image!}
                 fallback={issue.assignedToUser?.name?.charAt(0) || 'U'}
                 size="1"
-                radius="medium"
+                radius="small"
               />
             )}
           </Flex>

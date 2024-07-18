@@ -1,5 +1,5 @@
 import {auth} from '@/auth';
-import SourceCode from '@/components/source-code';
+import SourceCode from '@/components/SourceCode';
 import {Container, Theme} from '@radix-ui/themes';
 import type {Metadata} from 'next';
 import {SessionProvider} from 'next-auth/react';

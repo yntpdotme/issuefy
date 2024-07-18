@@ -46,7 +46,7 @@ const IssueForm = ({issue}: Props) => {
   });
 
   return (
-    <div className="max-w-xl mt-5">
+    <div className="mt-5 max-w-xl">
       {error && <FormError message={String(error)} />}
 
       <form className="space-y-3" onSubmit={onSubmit}>
