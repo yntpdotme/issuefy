@@ -30,7 +30,7 @@ export const Pagination = ({itemCount, pageSize, currentPage}: Props) => {
   };
 
   return (
-    <Flex align="center" gap="3" p="3" as="span">
+    <Flex align="center" gap="3" as="span">
       <Button
         color="gray"
         variant="ghost"

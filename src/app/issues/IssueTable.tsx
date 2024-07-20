@@ -3,6 +3,7 @@ import {Pagination} from '@/components/Pagination';
 import {Issue, Status} from '@prisma/client';
 import {Flex, Table} from '@radix-ui/themes';
 import NextLink from 'next/link';
+import {Suspense} from 'react';
 import {RxCaretSort} from 'react-icons/rx';
 import {IssueLink} from './IssueLink';
 
@@ -88,12 +89,17 @@ export const IssueTable = async ({searchParmas, issues}: Props) => {
             </Table.Cell>
           </Table.Row>
         ))}
+
         <Table.Row>
-          <Pagination
-            pageSize={issues.pageSize}
-            currentPage={issues.currentPage}
-            itemCount={issues.totalIssues}
-          />
+          <Table.Cell>
+            <Suspense fallback={null}>
+              <Pagination
+                pageSize={issues.pageSize}
+                currentPage={issues.currentPage}
+                itemCount={issues.totalIssues}
+              />
+            </Suspense>
+          </Table.Cell>
         </Table.Row>
       </Table.Body>
     </Table.Root>

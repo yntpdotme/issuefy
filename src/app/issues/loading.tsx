@@ -3,7 +3,7 @@ import {Button, Flex, Select, Table} from '@radix-ui/themes';
 import Link from 'next/link';
 
 const LoadingIssuesPage = () => {
-  const issues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const issues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   return (
     <Flex direction="column" gap="5" mt="20px">
