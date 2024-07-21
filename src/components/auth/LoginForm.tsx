@@ -106,7 +106,7 @@ export const LoginForm = () => {
         <Button
           type="submit"
           disabled={isPending}
-          className="-mt-2 h-9 w-full cursor-pointer bg-black dark:bg-white dark:text-black"
+          className="-mt-2 h-9 w-full cursor-pointer"
         >
           Login
         </Button>

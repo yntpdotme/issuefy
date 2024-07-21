@@ -74,7 +74,7 @@ export const ResetPasswordForm = () => {
         <Button
           type="submit"
           disabled={isPending}
-          className="mb-6 h-9 w-full cursor-pointer bg-black dark:bg-white dark:text-black"
+          className="mb-6 h-9 w-full cursor-pointer"
         >
           Send reset email
         </Button>
