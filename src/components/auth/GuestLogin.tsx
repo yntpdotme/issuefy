@@ -41,8 +41,7 @@ export const GuestLogin = () => {
 
       <Button
         type="button"
-        variant="outline"
-        color="gray"
+        variant="surface"
         onClick={onGuestLogin}
         disabled={isPending}
         className="h-9 w-full cursor-pointer text-[13px] font-normal text-inherit shadow-[inset_0_0_0_0.5px_var(--accent-a8)]"
