@@ -14,7 +14,7 @@ const AssigneeSelect = ({issue, users}: Props) => {
   const assignIssueToUser = async (userId: string) => {
     try {
       await assignIssue(issue.id, userId);
-    } catch (error) {
+    } catch {
       toast.error('Changes cloud not be saved');
     }
   };

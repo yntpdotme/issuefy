@@ -4,14 +4,12 @@ import {FieldValues, UseFormRegister} from 'react-hook-form';
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
 
 type Props<TFieldValues extends FieldValues> = {
-  // field: ControllerRenderProps<TFieldValues>;
   placeholder?: string;
   disabled?: boolean;
-  register: ReturnType<UseFormRegister<FieldValues>>;
+  register: ReturnType<UseFormRegister<TFieldValues>>;
 };
 
 export const PasswordInput = <TFieldValues extends FieldValues>({
-  // field,
   register,
   placeholder = '******',
   disabled = false,
