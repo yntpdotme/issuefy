@@ -11,11 +11,14 @@ import {RegisterSchema} from '@/schemas';
 import {register as signup} from '@/server/actions/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@radix-ui/themes';
+import {useRouter} from 'next/navigation';
 import {useEffect, useState, useTransition} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
 export const RegisterForm = () => {
+  const router = useRouter();
+
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -25,6 +28,7 @@ export const RegisterForm = () => {
     register,
     setFocus,
     formState: {errors},
+    reset,
   } = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -45,8 +49,15 @@ export const RegisterForm = () => {
 
     startTransition(async () => {
       const res = await signup(data);
+
+      if (res.success) {
+        reset();
+        setSuccess(res.success);
+        setTimeout(() => {
+          router.push('/auth/login');
+        }, 500);
+      }
       setError(res.error);
-      setSuccess(res.success);
     });
   };
 
