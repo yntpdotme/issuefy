@@ -31,7 +31,7 @@ export default async function RootLayout({
               <main className="flex-1 overflow-scroll p-5">
                 <Container>{children}</Container>
               </main>
-              <SourceCode link="https://github.com/issuefy" />
+              <SourceCode link="https://github.com/yntpdotme/issuefy#issuefy" />
             </Theme>
           </ThemeProvider>
         </body>

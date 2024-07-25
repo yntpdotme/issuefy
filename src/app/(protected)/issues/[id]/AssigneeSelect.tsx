@@ -3,6 +3,7 @@
 import {assignIssue} from '@/server/actions/issues';
 import {Issue} from '@prisma/client';
 import {ScrollArea, Select} from '@radix-ui/themes';
+import {useRouter} from 'next/navigation';
 import toast, {Toaster} from 'react-hot-toast';
 
 type Props = {
@@ -11,9 +12,12 @@ type Props = {
 };
 
 const AssigneeSelect = ({issue, users}: Props) => {
+  const router = useRouter();
+
   const assignIssueToUser = async (userId: string) => {
     try {
       await assignIssue(issue.id, userId);
+      router.refresh();
     } catch {
       toast.error('Changes cloud not be saved');
     }
