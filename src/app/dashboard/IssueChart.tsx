@@ -33,7 +33,7 @@ export const IssueChart = ({open, inProgress, closed}: Props) => {
 
           <Bar
             dataKey="value"
-            barSize={50}
+            barSize={40}
             style={{fill: 'var(--accent-10)'}}
           />
         </BarChart>

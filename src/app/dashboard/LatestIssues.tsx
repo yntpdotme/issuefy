@@ -41,14 +41,12 @@ export const LatestIssues = async () => {
       </Heading>
       <Flex direction="column" gap="4" m="4" mt="5">
         {issues?.map(issue => (
-          <Flex key={issue.id} gap="2" align="center">
-            <Flex gap="3" align="center" className="flex-1">
+          <Flex key={issue.id} gap="2" align="center" justify="between">
+            <Flex gap="3" align="center" className="w-[90%] flex-1">
               <StatusBadge status={issue.status} />
-              <Link href={`/issues/${issue.id}`}>
-                <Text truncate className="max-w-[300px]">
-                  {issue.title}
-                </Text>
-              </Link>
+              <Text truncate className="max-w-[95%]">
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+              </Text>
             </Flex>
             {issue.assignedToUser && (
               <Avatar
