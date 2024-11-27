@@ -6,47 +6,47 @@ import './globals.css';
 import NavBar from './NavBar';
 
 const inter = Inter({
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en" suppressHydrationWarning>
-			<body className={`${inter.variable} antialiased h-screen`}>
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					<Theme className="flex flex-col">
-						<NavBar />
-						<main className="p-5 flex-1 overflow-scroll">
-							<Container>{children}</Container>
-						</main>
-					</Theme>
-				</ThemeProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} h-screen antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Theme className="flex flex-col">
+            <NavBar />
+            <main className="flex-1 overflow-scroll p-5">
+              <Container>{children}</Container>
+            </main>
+          </Theme>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }
 
 export const metadata: Metadata = {
-	title: 'Issuefy',
-	description: 'Track your issues efficiently',
-	icons: {
-		icon: [
-			{
-				media: '(prefers-color-scheme: light)',
-				url: '/favicon.ico',
-				href: '/favicon.ico',
-			},
-			{
-				media: '(prefers-color-scheme: dark)',
-				url: '/favicon-dark.ico',
-				href: '/favicon-dark.ico',
-			},
-		],
-	},
+  title: 'Issuefy',
+  description: 'Track your issues efficiently',
+  icons: {
+    icon: [
+      {
+        media: '(prefers-color-scheme: light)',
+        url: '/favicon.ico',
+        href: '/favicon.ico',
+      },
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/favicon-dark.ico',
+        href: '/favicon-dark.ico',
+      },
+    ],
+  },
 };
